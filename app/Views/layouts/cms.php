@@ -191,6 +191,16 @@
                                 </ul>
 
                                 <ul class="pcoded-item pcoded-left-item">
+                                    <li <?php if($uri->getSegment(2) == "category") { echo 'class="active"'; } ?>>
+                                        <a href="<?= base_url('cms/category') ?>" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-sitemap"></i><b>K</b></span>
+                                            <span class="pcoded-mtext">Data Kategori</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <ul class="pcoded-item pcoded-left-item">
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>
