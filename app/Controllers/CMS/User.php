@@ -91,11 +91,13 @@ class User extends BaseController
             $username   =   strtolower($this->request->getVar('username'));
 
             $user->save([
-                'fullname'  =>  $fullname,
-                'gender'    =>  $this->request->getVar('gender'),
-                'username'  =>  $username,
-                'password'  =>  password_hash($username, PASSWORD_DEFAULT),
-                'isactive'  =>  $this->request->getVar('isactive'),
+                'fullname'      =>  $fullname,
+                'gender'        =>  $this->request->getVar('gender'),
+                'username'      =>  $username,
+                'password'      =>  password_hash($username, PASSWORD_DEFAULT),
+                'isactive'      =>  $this->request->getVar('isactive'),
+                'created_at'    =>  round(microtime(true) * 1000),
+                'updated_at'    =>  round(microtime(true) * 1000),
             ]);
 
             session()->setFlashdata('success', 'Berhasil Tambah User');
@@ -156,10 +158,11 @@ class User extends BaseController
             $username   =   strtolower($this->request->getVar('username'));
 
             $user->update($id, [
-                'fullname'  =>  $fullname,
-                'gender'    =>  $this->request->getVar('gender'),
-                'username'  =>  $username,
-                'isactive'  =>  $this->request->getVar('isactive'),
+                'fullname'      =>  $fullname,
+                'gender'        =>  $this->request->getVar('gender'),
+                'username'      =>  $username,
+                'isactive'      =>  $this->request->getVar('isactive'),
+                'updated_at'    =>  round(microtime(true) * 1000),
             ]);
 
             session()->setFlashdata('success', 'Berhasil Update User');

@@ -3,7 +3,6 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
-use CodeIgniter\I18n\Time;
 
 class UserSeeder extends Seeder
 {
@@ -11,22 +10,13 @@ class UserSeeder extends Seeder
     {
         $users  =   [
                         [
-                            'fullname'      =>  ucwords(strtolower('Anton Prakasa')),
+                            'fullname'      =>  ucwords(strtolower('Administrator')),
                             'gender'        =>  '1',
-                            'username'      =>  strtolower('anton123'),
-                            'password'      =>  password_hash(strtolower('anton123'), PASSWORD_DEFAULT),
+                            'username'      =>  strtolower('admin123'),
+                            'password'      =>  password_hash(strtolower('admin123'), PASSWORD_DEFAULT),
                             'isactive'      =>  '1',
-                            'created_at'    =>  Time::now(),
-                            'updated_at'    =>  Time::now()
-                        ],
-                        [
-                            'fullname'      =>  ucwords(strtolower('Dita Anggraini')),
-                            'gender'        =>  '0',
-                            'username'      =>  strtolower('dita456'),
-                            'password'      =>  password_hash(strtolower('dita456'), PASSWORD_DEFAULT),
-                            'isactive'      =>  '1',
-                            'created_at'    =>  Time::now(),
-                            'updated_at'    =>  Time::now()
+                            'created_at'    =>  round(microtime(true) * 1000),
+                            'updated_at'    =>  round(microtime(true) * 1000)
                         ]
                     ];
 

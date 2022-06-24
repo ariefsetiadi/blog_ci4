@@ -29,4 +29,4 @@ Blog using CodeIgniter 4 & MySql
   - Change **# database.tests.DBDriver = MySQLi** to **database.tests.DBDriver = MySQLi**
   - Change **# database.tests.DBPrefix =** to **database.tests.DBPrefix =**
 - [x] Run **php spark migrate**
-- [x] Run **php spark db:seed**
+- [x] Run **php spark db:seed DatabaseSeeder**
