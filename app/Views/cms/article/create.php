@@ -4,6 +4,11 @@
     Tambah Artikel
 <?= $this->endSection() ?>
 
+<?= $this->section('css') ?>
+    <!-- Summernote CDN Css -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
     <div class="card">
         <div class="card-header">
@@ -77,28 +82,26 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Status</label>
-                    <div class="col-sm-9">
-                        <select name="isactive" id="isactive" class="form-control">
-                            <option value="">-- Pilih Status --</option>
-                            <option value="1" <?php if(old('isactive') == '1') { echo 'selected'; } ?>>Aktif</option>
-                            <option value="0" <?php if(old('isactive') == '0') { echo 'selected'; } ?>>Nonaktif</option>
-                        </select>
-                        <?php if ($validation->getError('isactive')): ?>
-                            <div class="form-txt-danger">
-                                <?= $validation->getError('isactive') ?>
-                            </div>                                
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-9"></label>
                     <div class="col-sm-3 d-flex justify-content-end">
-                        <input type="submit" value="Draft" class="btn btn-success mr-1">
-                        <input type="submit" value="Published" class="btn btn-primary ml-1">
+                        <button type="submit" class="btn btn-success mr-1" value="0">Draft</button>
+                        <button type="submit" class="btn btn-primary ml-1" value="1">Publish</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('js') ?>
+    <!-- Summernote CDN JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#content').summernote({
+                height: '300px'
+            });
+        });
+    </script>
 <?= $this->endSection() ?>
