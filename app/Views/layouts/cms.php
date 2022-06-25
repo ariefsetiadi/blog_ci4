@@ -201,6 +201,16 @@
                                 </ul>
 
                                 <ul class="pcoded-item pcoded-left-item">
+                                    <li <?php if($uri->getSegment(2) == "article") { echo 'class="active"'; } ?>>
+                                        <a href="<?= base_url('cms/article') ?>" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-file"></i><b>A</b></span>
+                                            <span class="pcoded-mtext">Data Artikel</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <ul class="pcoded-item pcoded-left-item">
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>

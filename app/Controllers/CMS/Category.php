@@ -17,7 +17,7 @@ class Category extends BaseController
     public function loadData()
     {
         $db         =   db_connect();
-        $builder    =   $db->table('categories')->select('title, description, isactive, id')->orderby('id', 'desc');
+        $builder    =   $db->table('categories')->select('title, description, isactive, id')->where('id !=', '1')->orderby('id', 'desc');
 
         return DataTable::of($builder)->addNumbering('no')
             ->edit('isactive', function ($data) {

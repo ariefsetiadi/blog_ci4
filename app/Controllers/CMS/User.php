@@ -17,7 +17,7 @@ class User extends BaseController
     public function loadData()
     {
         $db         =   db_connect();
-        $builder    =   $db->table('users')->select('fullname, gender, username, isactive, id')->where('id !=', session()->id)->orderby('id', 'desc');
+        $builder    =   $db->table('users')->select('fullname, gender, username, isactive, id')->where('id !=', session()->id)->where('id !=', '1')->orderby('id', 'desc');
 
         return DataTable::of($builder)->addNumbering('no')
             ->edit('gender', function ($data) {

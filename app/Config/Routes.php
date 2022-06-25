@@ -65,6 +65,16 @@ $routes->get('cms/category/edit/(:num)', 'CMS\Category::edit/$1', ['filter' => '
 $routes->post('cms/category/update/(:num)', 'CMS\Category::update/$1', ['filter' => 'auth']);
 $routes->get('cms/category/delete/(:num)', 'CMS\Category::delete/$1', ['filter' => 'auth']);
 
+// Route CMS Article
+$routes->get('cms/article', 'CMS\Article::index', ['filter' => 'auth']);
+$routes->get('cms/article/loadData', 'CMS\Article::loadData', ['filter' => 'auth']);
+$routes->get('cms/article/add', 'CMS\Article::create', ['filter' => 'auth']);
+$routes->post('cms/article/save', 'CMS\Article::save', ['filter' => 'auth']);
+$routes->get('cms/article/show/(:num)', 'CMS\Article::show/$1', ['filter' => 'auth']);
+$routes->get('cms/article/edit/(:num)', 'CMS\Article::edit/$1', ['filter' => 'auth']);
+$routes->post('cms/article/update/(:num)', 'CMS\Article::update/$1', ['filter' => 'auth']);
+$routes->get('cms/article/delete/(:num)', 'CMS\Article::delete/$1', ['filter' => 'auth']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
