@@ -4,44 +4,25 @@
     Data User
 <?= $this->endSection() ?>
 
+<?= $this->section('header') ?>
+    Data User
+<?= $this->endSection() ?>
+
 <?= $this->section('css') ?>
-    <!-- DataTable CDN CSS -->
-    <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-
-    <style>
-        .dataTables_filter {
-            display: flex;
-            justify-content: end;
-        }
-
-        .dataTables_paginate {
-            display: flex;
-            justify-content: end;
-        }
-    </style>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
     <div class="card">
         <div class="card-header">
-            <a href="<?= base_url('cms/user/add') ?>" class="btn btn-sm btn-outline-primary">TAMBAH</a>
+            <a href="<?= base_url('cms/user/add') ?>" class="btn btn-primary">TAMBAH</a>
         </div>
 
-        <div class="card-block">
-            <?php
-                if(session()->has('success')) {
-            ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <?= session()->getFlashdata('success') ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-            <?php
-                }
-            ?>
-
-            <table id="data" class="table table-sm table-striped table-bordered" cellspacing="0" width="100%">
+        <div class="card-body">
+            <table id="data" class="table table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -77,9 +58,13 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-    <!-- DataTable CDN JS -->
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') ?>"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {

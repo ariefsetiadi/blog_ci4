@@ -4,6 +4,10 @@
     Tambah Artikel
 <?= $this->endSection() ?>
 
+<?= $this->section('header') ?>
+    Tambah Artikel
+<?= $this->endSection() ?>
+
 <?= $this->section('css') ?>
     <!-- Summernote CDN Css -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -15,85 +19,78 @@
             <a href="<?= base_url('cms/article') ?>" class="btn btn-secondary">Kembali</a>
         </div>
 
-        <div class="card-block">
-            <?php $validation = \Config\Services::validation(); ?>
+        <?php $validation = \Config\Services::validation(); ?>
 
-            <?php
-                if(session()->has('message')) {
-            ?>
-                    <div class="alert alert-error alert-dismissible fade show" role="alert">
-                        <?= session()->getFlashdata('message') ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-            <?php
-                }
-            ?>
+        <form action="<?= base_url('cms/article/save') ?>" method="post" class="form-horizontal">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="title">Judul Artikel</label>
+                    <input type="text" name="title" id="title" class="form-control <?php if($validation->getError('title')){ echo 'is-invalid'; } ?>" value="<?= old('title'); ?>" placeholder="Judul Artikel">
+                    <?php if ($validation->getError('title')): ?>
+                        <span class="error invalid-feedback">
+                            <?= $validation->getError('title') ?>
+                        </span>                                
+                    <?php endif; ?>
+                </div>
 
-            <form action="<?= base_url('cms/article/save') ?>" method="post">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Nama Kategori</label>
-                    <div class="col-sm-9">
-                        <select name="category_id" id="category_id" class="form-control">
-                            <option value="">-- Pilih Kategori --</option>
-                            <?php foreach($categories as $row) { ?>
-                                <option value="<?= $row['id'] ?>" <?php if(old('category_id') == $row['id']) { echo 'selected'; } ?>><?= $row['title'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <?php if ($validation->getError('category_id')): ?>
-                            <div class="form-txt-danger">
-                                <?= $validation->getError('category_id') ?>
-                            </div>                                
-                        <?php endif; ?>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="category_id">Kategori</label>
+                            <select name="category_id" id="category_id" class="form-control <?php if($validation->getError('category_id')){ echo 'is-invalid'; } ?>">
+                                <option value="">-- Pilih Kategori --</option>
+                                <?php foreach($categories as $row) { ?>
+                                    <option value="<?= $row['id'] ?>" <?php if(old('category_id') == $row['id']) { echo 'selected'; } ?>><?= $row['title'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <?php if ($validation->getError('category_id')): ?>
+                                <span class="error invalid-feedback">
+                                    <?= $validation->getError('category_id') ?>
+                                </span>                                
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="img">Thumbnail</label>
+                            <div class="input-group <?php if($validation->getError('img')){ echo 'is-invalid'; } ?>">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="img" id="img">
+                                    <label class="custom-file-label" for="img">Pilih Thumbnail</label>
+                                </div>
+                            </div>
+                            <?php if ($validation->getError('img')): ?>
+                                <span class="error invalid-feedback">
+                                    <?= $validation->getError('img') ?>
+                                </span>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Thumbnail</label>
-                    <div class="col-sm-9">
-                        <input type="file" name="thumbnail" id="thumbnail" class="form-control">
-                        <?php if ($validation->getError('thumbnail')): ?>
-                            <div class="form-txt-danger">
-                                <?= $validation->getError('thumbnail') ?>
-                            </div>                                
-                        <?php endif; ?>
-                    </div>
+
+                <div class="form-group">
+                    <label for="content">Konten</label>
+                    <textarea name="content" id="content" rows="5" class="form-control <?php if($validation->getError('content')){ echo 'is-invalid'; } ?>" placeholder="Konten"><?= old('content'); ?></textarea>
+                    <?php if ($validation->getError('content')): ?>
+                        <span class="error invalid-feedback">
+                            <?= $validation->getError('content') ?>
+                        </span>                                
+                    <?php endif; ?>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Judul</label>
-                    <div class="col-sm-9">
-                        <input type="text" name="title" id="title" class="form-control" value="<?= old('title'); ?>" placeholder="Judul">
-                        <?php if ($validation->getError('title')): ?>
-                            <div class="form-txt-danger">
-                                <?= $validation->getError('title') ?>
-                            </div>                                
-                        <?php endif; ?>
-                    </div>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <button type="submit" class="btn btn-primary">Publish</button>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Konten</label>
-                    <div class="col-sm-9">
-                        <textarea name="content" id="content" rows="5" class="form-control" placeholder="Konten"><?= old('content'); ?></textarea>
-                        <?php if ($validation->getError('content')): ?>
-                            <div class="form-txt-danger">
-                                <?= $validation->getError('content') ?>
-                            </div>                                
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-9"></label>
-                    <div class="col-sm-3 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success mr-1" value="0">Draft</button>
-                        <button type="submit" class="btn btn-primary ml-1" value="1">Publish</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
+        <!-- bs-custom-file-input -->
+        <script src="<?= base_url('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') ?>"></script>
+
     <!-- Summernote CDN JS -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
@@ -102,6 +99,10 @@
             $('#content').summernote({
                 height: '300px'
             });
+        });
+
+        $(function () {
+            bsCustomFileInput.init();
         });
     </script>
 <?= $this->endSection() ?>

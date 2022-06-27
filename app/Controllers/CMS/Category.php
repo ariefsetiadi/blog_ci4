@@ -22,14 +22,14 @@ class Category extends BaseController
         return DataTable::of($builder)->addNumbering('no')
             ->edit('isactive', function ($data) {
                 if($data->isactive == '1') {
-                    return '<label class="label label-success">Aktif</label>';
+                    return '<span class="badge badge-success">Aktif</span>';
                 } else {
-                    return '<label class="label label-danger">Nonaktif</label>';
+                    return '<span class="badge badge-danger">Nonaktif</span>';
                 }
             })
             ->add('action', function($data) {
-                return '<a href="category/edit/' . $data->id . '" class="btn btn-sm btn-outline-warning mr-1">EDIT</a>
-                        <a href="javscript:void(0)" class="btn btn-sm btn-outline-danger ml-1" data-href="category/delete/' . $data->id . '" onclick="confirmDelete(this)">HAPUS</a>';
+                return '<a href="category/edit/' . $data->id . '" class="btn btn-warning mr-1">EDIT</a>
+                        <a href="javscript:void(0)" class="btn btn-danger ml-1" data-href="category/delete/' . $data->id . '" onclick="confirmDelete(this)">HAPUS</a>';
             })
             ->toJson(true);
     }

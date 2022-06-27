@@ -22,15 +22,15 @@ class Article extends BaseController
         return DataTable::of($builder)->addNumbering('no')
             ->edit('isactive', function ($data) {
                 if($data->isactive == '1') {
-                    return '<label class="label label-success">Aktif</label>';
+                    return '<span class="badge badge-success">Published</span>';
                 } else {
-                    return '<label class="label label-danger">Nonaktif</label>';
+                    return '<span class="badge badge-danger">Draft</span>';
                 }
             })
             ->add('action', function($data) {
-                return '<a href="article/show/' . $data->id . '" class="btn btn-sm btn-outline-success">DETAIL</a>
-                        <a href="article/edit/' . $data->id . '" class="btn btn-sm btn-outline-warning mx-2">EDIT</a>
-                        <a href="javscript:void(0)" class="btn btn-sm btn-outline-danger" data-href="article/delete/' . $data->id . '" onclick="confirmDelete(this)">HAPUS</a>';
+                return '<a href="article/show/' . $data->id . '" class="btn btn-success">DETAIL</a>
+                        <a href="article/edit/' . $data->id . '" class="btn btn-warning mx-2">EDIT</a>
+                        <a href="javscript:void(0)" class="btn btn-danger" data-href="article/delete/' . $data->id . '" onclick="confirmDelete(this)">HAPUS</a>';
             })
             ->toJson(true);
     }
@@ -45,7 +45,42 @@ class Article extends BaseController
 
     public function save()
     {
-        # code...
+        $val    =   $this->validate([
+                        'title' => [
+                            'rules'     =>  'required|is_unique[articles.title]|max_length[255]',
+                            'errors'    =>  [
+                                'required'      =>  'Judul wajib diisi',
+                                'is_unique'     =>  'Judul sudah digunakan',
+                                'max_length'    =>  'Judul maksimal 255 karakter',
+                            ]
+                        ],
+                        'category_id' => [
+                            'rules'     =>  'required',
+                            'errors'    =>  [
+                                'required'      =>  'Nama Kategori wajib diisi',
+                            ]
+                        ],
+                        'thumbnail' => [
+                            'rules'     =>  'uploaded[img]|mime_in[img.image/png,image/jpg,image/jpeg]|max_size[img.2048]',
+                            'errors'    =>  [
+                                'uploaded'  =>  'Thumbnail wajib diupload',
+                                'mime_in'   =>  'Thumbnail hanya boleh PNG, JPG, atau JPEG',
+                                'max_size'  =>  'Thumbnail maksimal 2 MB',
+                            ]
+                        ],
+                        'content' => [
+                            'rules'     =>  'required',
+                            'errors'    =>  [
+                                'required'      =>  'Konten wajib diisi',
+                            ]
+                        ],
+                    ]);
+
+        if(!$val) {
+            return redirect()->back()->withInput()->with('validation', $this->validator);
+        } else {
+            echo 'success';
+        }
     }
 
     public function show($id)
